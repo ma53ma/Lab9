@@ -1,0 +1,13 @@
+.git
+.gitignore
+.dockerignore
+/Dockerfile
+/.gradle
+/out/
+/build/
+/test-output/
+/tests
+*.class
+*.swp
+*.swo
+/node_modules/

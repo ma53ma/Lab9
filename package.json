@@ -1,0 +1,19 @@
+{
+  "scripts": {
+    "build": "docker build -t cs125/quiz .",
+    "tests:simple": "npm run build && cd tests/simple && docker run -v `pwd`:/grade -e DEBUG=grade --network none cs125/quiz"
+  },
+  "dependencies": {
+    "byline": "^5.0.0",
+    "chai": "^4.1.2",
+    "child-process-promise": "^2.2.1",
+    "debug": "^3.1.0",
+    "directory-tree": "^2.1.0",
+    "fs-extra": "^5.0.0",
+    "handlebars": "^4.0.11",
+    "js-yaml": "^3.11.0",
+    "lodash": "^4.17.5",
+    "merge-dirs": "^0.2.1",
+    "moment": "^2.21.0"
+  }
+}

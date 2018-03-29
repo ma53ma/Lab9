@@ -1,0 +1,42 @@
+name: "Quiz"
+version: 1.0.0
+grading:
+  timeout: PT30S
+  run: "./gradlew grade -Pgrade.capture -Pgrade.secure"
+  ignoreOutput:
+    - "^java.security.policy: error parsing file.*"
+    - "^Unable to initialize policy entry:.*"
+    - "^.*?expected \\[\\;\\], found \\[priority\\]$"
+    - "^WARNING: An illegal reflective access operation has occurred.*"
+    - "^WARNING: Illegal reflective access by org.codehaus.groovy.reflection.CachedClass.*"
+    - "^WARNING: Please consider reporting this to the maintainers.*"
+    - "^WARNING: Use --illegal-access=warn to enable warnings.*"
+    - "^WARNING: All illegal access operations will be denied in a future release.*"
+    - "^The TaskInternal.*"
+    - "^Deprecated Gradle features were used in this build.*"
+    - "^See https://docs.gradle.org.*"
+scoring:
+  max: 100
+  selectors:
+    - test
+files:
+  - "Question"
+secure: config/security.policy
+reporting:
+  file: /base/grade.json
+test:
+  name: "testNG Tests"
+  selectors:
+    - selector: "count(//testsuite[@name='QuestionTest']) = 1 and count(//testsuite[@name='QuestionTest']//failure) = 0"
+      score: 100
+      message: "No test failures"
+      name: "QuestionTest"
+    - selector: "count(//testsuite[@name='QuestionTest']) = 1 and count(//testsuite[@name='QuestionTest']//failure) > 0"
+      score: 0
+      message: "Test failures"
+      name: "QuestionTest"
+    - selector: "count(//testsuite[@name='QuestionTest']) = 0"
+      score: 0
+      message: "Code did not compile"
+      name: "QuestionTest"
+# vim: ts=2:sw=2:et
